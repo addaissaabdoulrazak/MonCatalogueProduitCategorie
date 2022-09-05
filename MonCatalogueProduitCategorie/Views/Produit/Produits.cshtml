@@ -1,0 +1,80 @@
+﻿@using MonCatalogueProduitCategorie.Service
+@model IEnumerable<Produit>
+
+
+  <div class="d-flex">
+         <div class="mr-auto p-2">
+             <a class="btn btn-primary" asp-action="Create">Nouveau Produit</a>
+         </div>
+  </div>
+     
+
+  <div class="panel panel-primary">
+          <div class="panel-heading">Liste des produits</div>
+
+          <div class="container mb-1">
+              <form method="get" asp-action='Index'>
+                  <label for="a">mot clé</label>
+                  <input id="a" type="text" name="motCle"/>
+                  <button class="btn btn-primary" type="submit">chercher</button>
+              </form>
+          </div>
+         <div class="panel-body">
+
+         <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+
+                         <th>
+                              Designation
+                         </th>
+
+                        <th>Prix</th>
+
+                        <th>Quantité</th>
+
+                        <th>Categorie</th>
+                    </tr>
+                             @foreach(var item in Model)
+                           {
+                               <tr>
+                                   <td>
+                                       @item.ProduitID
+                                   </td>
+                                   <td>
+                                       @item.Designation
+                                   </td>
+                                                      <td>
+                                       @item.Prix
+                                   </td>
+                                   <td>
+                                       @item.Quantite
+                                   </td>
+                                   <td>
+                                       @item.Categorie.CategorieName
+                                   </td>
+                               </tr>
+                           }
+         </table>
+ 
+         </div>
+         <div>
+             <ul class="nav nav-pills">
+                @{
+                    for(int i=0; i<ViewBag.totalPages;i++)
+                    {
+                        string className = "";
+                        if(i==ViewBag.currentPage)
+                        {
+                            className = "active";
+                        }
+                        <li class="@className">
+                             <a asp-action="Index" asp-route-numeroPage="@i">@i</a>
+                         </li>
+                    }
+                 }    
+             </ul>
+         </div>
+  </div>
+
+

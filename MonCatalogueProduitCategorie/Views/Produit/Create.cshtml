@@ -1,0 +1,81 @@
+﻿@using MonCatalogueProduitCategorie.Service
+@model Produit
+ <!--<span asp-validation-for="J1Chambres" class="text-danger"></span>--> 
+<div class="container">
+   <div class="panel panel-primary">
+            <div class="panel-heading">
+               Ajouter un nouveau produit
+            </div>
+
+       <div class="panel-body">
+          <div class="col-md-12">
+             <form method="post" asp-action="Save">
+                     <div class="container">
+                        <div class="form-group">
+                            <div class=" row">
+                                <div class="col-6">
+
+                                        <label for="des" class="control-label">Désignation</label>
+                                        <input name="Designation" type="text" value="@Model.Designation" class="form-control" />
+                                     @Html.ValidationMessageFor(p=>p.Designation, "", new{ @class="text-danger"})
+                              </div>    
+                            </div>
+                       </div>
+                    </div>
+
+                 <div class="container">
+                        <div class="form-group">
+                            <div class=" row">
+                                <div class="col-6">
+                                        <label for="prix" class="control-label">Prix</label>
+                                        <input class="form-control" name="Prix" type="number" value="@Model.Prix" />
+                                        @Html.ValidationMessageFor(p=>p.Prix, "", new{ @class="text-danger"})
+                                 </div>    
+                            </div>
+                       </div>
+                    </div>
+
+                     <div class="container">
+                        <div class="form-group">
+                            <div class=" row">
+                                <div class="col-6">
+                                        <label for="quantite" class="control-label">Quantite</label>
+                                        <input class="form-control" name="Quantite" type="number" value="@Model.Quantite" />
+                                        @Html.ValidationMessageFor(p=>p.Quantite, "", new{ @class="text-danger"}) 
+                                </div>    
+                            </div>
+                       </div>
+                    </div>
+
+                  <div class="container">
+                        <div class="form-group">
+                            <div class=" row">
+                                <div class="col-6">
+
+                    <label for="categorie" class="control-label">Categorie:</label>
+
+                     <select name="CategorieID">
+
+                        @{
+                        foreach( MonCatalogueProduitCategorie.Service.Categorie item in ViewBag.categories)
+                         {
+                            <option value="@item.CategorieID" >@item.CategorieName</option>
+                         }
+
+
+                        }
+
+                    </select>
+
+                                </div>    
+                            </div>
+                       </div>
+                    </div>
+                   <div class="d-grid gap-2 d-md-block">
+                        <button class="btn btn-primary" type="submit">Envoyer</button>
+                    </div>
+              </form>
+           </div>
+       </div>
+   </div>
+</div>
